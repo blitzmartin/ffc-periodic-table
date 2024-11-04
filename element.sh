@@ -18,7 +18,7 @@ PRINT_ELEMENT() {
   else
     ATOMIC_NUMBER=$(echo $($PSQL "SELECT atomic_number FROM elements WHERE atomic_number=$INPUT;") | sed 's/ //g')
   fi
-  
+
   if [[ -z $ATOMIC_NUMBER ]]
   then
     echo "I could not find that element in the database."
@@ -123,7 +123,7 @@ FIX_DB() {
   DELETE_ELEMENTS_1000=$($PSQL "DELETE FROM elements WHERE atomic_number=1000;")
   echo "DELETE_PROPERTIES_1000                      : $DELETE_PROPERTIES_1000"
   echo "DELETE_ELEMENTS_1000                        : $DELETE_ELEMENTS_1000"
-  
+
   # Your properties table should not have a type column
   DELETE_COLUMN_PROPERTIES_TYPE=$($PSQL "ALTER TABLE properties DROP COLUMN type;")
   echo "DELETE_COLUMN_PROPERTIES_TYPE               : $DELETE_COLUMN_PROPERTIES_TYPE"
